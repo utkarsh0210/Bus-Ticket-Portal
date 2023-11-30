@@ -11,11 +11,17 @@ cur.execute('create table if not exists running(b_id varchar(5) ,run_date date,s
 cur.execute('create table if not exists route(r_id varchar(5) not null primary key,s_name varchar(20),s_id varchar(5),e_name varchar(20),e_id varchar(5) )')
 cur.execute('create table if not exists booking_history(name varchar(20),gender char(1),no_of_seat int,phone char(10),age int,booking_ref varchar(10) not null primary key,booking_date date,travel_date date,bid varchar(5),foreign key(bid) references bus(bus_id))')
 
+
 root=Tk()
+
+
+
 '''
 def winhome(event=*None*) makes the event parameter optional by providing a default value of None. This way, whether
 the function is called with or without an event, it won't raise a type error.
-'''  
+'''
+
+    
 def winhome(event=None):
     #Opening a new window
     winhome=Toplevel(root)
@@ -29,6 +35,7 @@ def winhome(event=None):
     Label(winhome, text="For Admins Only",font="Arial 13",fg="red").place(relx=0.66,rely=0.5)
     winhome.state('zoomed')
     
+
 def newoper():
     opt=Toplevel(root)
     opt.title("Bus Operator Details")
@@ -80,11 +87,9 @@ def newoper():
         else:
             showerror("invalid input", "enter id correctly")
     Button(opt,text="Add",command=addoper).place(relx=0.81,rely=0.38)
-    def editoper():
-        pass
-    Button(opt,text="Edit",command=editoper).place(relx=0.84,rely=0.38)
     Button(opt,text="Home",command=winhome).place(relx=0.5,rely=0.5)
     opt.state('zoomed')
+
 
 def newbus():
     bus=Toplevel(root)
@@ -149,6 +154,8 @@ def newbus():
                 showerror("error","no such bus id exists, add new bus !!!")
     Button(bus,text="Edit",command=editbus).place(relx=0.57,rely=0.5)'''
     bus.state('zoomed')
+
+
 
 def newrun():
     run=Toplevel(root)
@@ -240,30 +247,29 @@ def seatcheck():
                 b_ref=i[5]
                 travel_date=i[6]
                 b_i_d=i[7]
-            cur.execute('select fair,route_id from bus where bus_id=?',[b_i_d])
+            cur.execute('select fair from bus where bus_id=?',[b_i_d])
             res_bus=cur.fetchall()
-            if len(res_bus) > 0:
+            fare=0
+            if len(res_bus)>0:
                 fare=res_bus[0][0]
-            else:
-                showerror('Error',"No Bus available")
-            route_id=res_bus[0][1]
-            cur.execute('select s_name,e_name from route where r_id=?',[route_id])
-            res_route=cur.fetchall()
-            s_name=res_route[0][0]
-            e_name=res_route[0][1]
+            #route_id=res_bus[0][1]
+            #cur.execute('select s_name,e_name from route where r_id=?',[route_id])
+            #res_route=cur.fetchall()
+            #st=res_route[0][0]
+            #et=res_route[0][1]
             cur.execute('select booking_ref from booking_history where phone=?',[phone])
             res_ref=cur.fetchall()
             b_ref=res_ref[0][0]
-            Label(seatchk,text="YOUR TICKET", font='Arial 12 bold', bg='blue').place(relx=0.45,rely=0.45)
+            Label(seatchk,text="YOUR TICKET", font='Arial 12 bold', bg='lightblue').place(relx=0.45,rely=0.45)
             Label(seatchk,text="Booking ref = "+b_ref,font='Arial 12', fg='blue').place(relx=0.4,rely=0.5)
             Label(seatchk,text="Name = " + name, font='Arial 12', fg='blue').place(relx=0.4,rely=0.55)
             Label(seatchk,text="Gender = " + gen, font='Arial 12 ', fg='blue').place(relx=0.4,rely=0.6)
             Label(seatchk,text="No of seats = " + str(seat), font='Arial 12 ', fg='blue').place(relx=0.4,rely=0.65)
             Label(seatchk,text="Age = " + str(age), font='Arial 12 ', fg='blue').place(relx=0.4,rely=0.7)
-            Label(seatchk,text="Travel date = " + travel_date, font='Arial 12 ', fg='blue').place(relx=0.4,rely=0.75)
+            Label(seatchk,text="Travel date = " + str(travel_date), font='Arial 12 ', fg='blue').place(relx=0.4,rely=0.75)
             Label(seatchk,text="Fare = " + str(fare), font='Arial 12', fg='blue').place(relx=0.4,rely=0.8)
             Label(seatchk,text="Total fare = " + str(fare*seat), font='Arial 12', fg='blue').place(relx=0.4,rely=0.85)
-    Button(seatchk,text="Check",font="Arial 11",command=ticketstatus).place(relx=0.54,rely=0.365)
+    Button(seatchk,text="Check",font="Arial 11",fg="green",command=ticketstatus).place(relx=0.54,rely=0.365)
 
 def adddata():
     dataadd = Toplevel(root)
@@ -292,7 +298,6 @@ def seatbooking():
     date=Entry(winseatbook)
     Label(winseatbook,text="Format:YYYY-MM-DD",font='Arial 8',fg='red').place(relx=0.59,rely=0.375)
     date.place(relx=0.59,rely=0.35)
-    
     winseatbook.state('zoomed')
     def showbus():
         st=start.get()
@@ -439,6 +444,8 @@ def seatbooking():
     Button(winseatbook,text='Show Bus',bg='green',command=showbus).place(relx=0.68,rely=0.345)        
     Button(winseatbook,text="Home",command=winhome).place(relx=0.73,rely=0.345)
 
+
+
 root.title("Project Details")
 frame=Frame(root)
 frame.grid(row=0,column=0)
@@ -449,8 +456,13 @@ Label(root,text="Mobile No: 8957369691",font="Arial 15").place(relx=0.5,rely=0.4
 Label(root,text="Submitted to: Dr. Mahesh Kumar",font="Algerian 40",bg='cyan3').place(relx=0.5,rely=0.5,anchor=CENTER)
 Label(root,text="Project Based Learning",font="Arial 15").place(relx=0.5,rely=0.58,anchor=CENTER)
 Label(root,text="Press any key to continue",font="Arial 15",fg="red").place(relx=0.42,rely=0.9)
+
+
 #Key Binding
 root.bind("<Key>",winhome)
+
+
 #Maximize the window using state property
 root.state('zoomed')
+
 root.mainloop()  
