@@ -23,13 +23,14 @@ def winhome(event=None):
     #Opening a new window
     winhome=Toplevel(root)
     winhome.title("Bus Booking Portal")
+    winhome.configure(bg="Bisque")
     #photo=PhotoImage(file='starbus.PNG')
     #Label(winhome, image=photo).place(relx=0.5,rely=0.5)
     Label(winhome,text="Online Bus Booking System",font='Arial 40',bg='cyan2').place(relx=0.5,rely=0.2,anchor=CENTER)
     Button(winhome,text="Seat Booking",font='Arial 15',bg="green",command=seatbooking).place(relx=0.25,rely=0.4)
     Button(winhome,text="Check Seat",font='Arial 15',bg="green",command=seatcheck).place(relx=0.45,rely=0.4)
     Button(winhome,text="Add Bus Details",font='Arial 15',bg="green",command=adddata).place(relx=0.65,rely=0.4)
-    Label(winhome, text="For Admins Only",font="Arial 13",fg="red").place(relx=0.66,rely=0.5)
+    Label(winhome, text="For Admins Only",font="Arial 13",fg="red",bg="Bisque").place(relx=0.66,rely=0.5)
     winhome.state('zoomed')
     
 
@@ -264,7 +265,7 @@ def seatcheck():
             Label(seatchk,text="Travel date = " + str(travel_date), font='Arial 12 ', fg='blue').place(relx=0.4,rely=0.75)
             Label(seatchk,text="Fare = " + str(fare), font='Arial 12', fg='blue').place(relx=0.4,rely=0.8)
             Label(seatchk,text="Total fare = " + str(fare*seat), font='Arial 12', fg='blue').place(relx=0.4,rely=0.85)
-    Button(seatchk,text="Check",font="Arial 11",fg="green",command=ticketstatus).place(relx=0.54,rely=0.365)
+    Button(seatchk,text="Check",font="Arial 11",fg="green",bg="Sandy brown",command=ticketstatus).place(relx=0.54,rely=0.365)
 
 def adddata():
     dataadd = Toplevel(root)
