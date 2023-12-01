@@ -14,14 +14,11 @@ cur.execute('create table if not exists booking_history(name varchar(20),gender 
 
 root=Tk()
 
-
-
 '''
 def winhome(event=*None*) makes the event parameter optional by providing a default value of None. This way, whether
 the function is called with or without an event, it won't raise a type error.
 '''
 
-    
 def winhome(event=None):
     #Opening a new window
     winhome=Toplevel(root)
@@ -154,8 +151,6 @@ def newbus():
                 showerror("error","no such bus id exists, add new bus !!!")
     Button(bus,text="Edit",command=editbus).place(relx=0.57,rely=0.5)'''
     bus.state('zoomed')
-
-
 
 def newrun():
     run=Toplevel(root)
@@ -444,23 +439,19 @@ def seatbooking():
     Button(winseatbook,text='Show Bus',bg='green',command=showbus).place(relx=0.68,rely=0.345)        
     Button(winseatbook,text="Home",command=winhome).place(relx=0.73,rely=0.345)
 
-
-
 root.title("Project Details")
 frame=Frame(root)
 frame.grid(row=0,column=0)
 Label(root,text="Online Bus Booking System",font="Algerian 40",bg='cyan3').place(relx=0.5,rely=0.1,anchor=CENTER)
-Label(root,text="Name: Utkarsh Gupta",font="Arial 15").place(relx=0.5,rely=0.2,anchor=CENTER)
-Label(root,text="Enrollment No: 221B469",font="Arial 15").place(relx=0.5,rely=0.3,anchor=CENTER)
-Label(root,text="Mobile No: 8957369691",font="Arial 15").place(relx=0.5,rely=0.4,anchor=CENTER)
-Label(root,text="Submitted to: Dr. Mahesh Kumar",font="Algerian 40",bg='cyan3').place(relx=0.5,rely=0.5,anchor=CENTER)
+Label(root,text="Name: Abc Xyz",font="Arial 15").place(relx=0.5,rely=0.2,anchor=CENTER)
+Label(root,text="Enrollment No: 123X123",font="Arial 15").place(relx=0.5,rely=0.3,anchor=CENTER)
+Label(root,text="Mobile No: XXXXXXXXXX",font="Arial 15").place(relx=0.5,rely=0.4,anchor=CENTER)
+Label(root,text="Submitted to: Dr. Faculty Name",font="Algerian 40",bg='cyan3').place(relx=0.5,rely=0.5,anchor=CENTER)
 Label(root,text="Project Based Learning",font="Arial 15").place(relx=0.5,rely=0.58,anchor=CENTER)
 Label(root,text="Press any key to continue",font="Arial 15",fg="red").place(relx=0.42,rely=0.9)
 
-
 #Key Binding
 root.bind("<Key>",winhome)
-
 
 #Maximize the window using state property
 root.state('zoomed')
